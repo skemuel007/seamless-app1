@@ -45,5 +45,9 @@ class CourseController extends Controller
         ], 200);
     }
 
+    public function exportCourses() {
+
+    }
+
 
 }
