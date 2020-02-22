@@ -11,7 +11,7 @@ class CourseController extends Controller
     public function __construct()
     {
         // add middle ware for authentication and authorization
-        $this->middleware('auth:api');
+        $this->middleware('jwt.auth');
     }
 
     /**
