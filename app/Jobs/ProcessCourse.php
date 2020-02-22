@@ -2,6 +2,7 @@
 
 namespace App\Jobs;
 
+use App\Course;
 use Illuminate\Bus\Queueable;
 use Illuminate\Queue\SerializesModels;
 use Illuminate\Queue\InteractsWithQueue;
@@ -30,5 +31,6 @@ class ProcessCourse implements ShouldQueue
     public function handle()
     {
         //
+        $courses = factory(Course::class, 50)->create();
     }
 }
