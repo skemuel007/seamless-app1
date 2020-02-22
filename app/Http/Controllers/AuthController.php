@@ -50,7 +50,38 @@ class AuthController extends Controller
         ], JsonResponse::HTTP_OK);
     }
 
-    public function register() {
+    /**
+     * @param Request $request
+     * @return JsonResponse
+     */
+    public function register(Request $request) {
+        // validate request parameters
+        $validator = Validator::make($request->all(), [
+            'email' => 'required|string|email|max:255|unique:users',
+            'name' => 'required',
+            'password' => 'required'
+        ]);
 
+        // check for validation failure
+        if ($validator->fails()) {
+            return response()->json([
+                'message' => 'Request validation error',
+                'error' => $validator->errors()
+            ],
+                422);
+        }
+
+        // create the user
+        $user = User::create([
+            'name' => $request->name,
+            'email' => $request->email,
+            'password' => bcrypt($request->password),
+        ]);
+
+        // return json response with status 201 created
+        return response()->json([
+            'message' => 'User created',
+            'data' => null
+        ], JsonResponse::HTTP_CREATED);
     }
 }
