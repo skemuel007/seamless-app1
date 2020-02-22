@@ -19,5 +19,6 @@ use Illuminate\Http\Request;
 
 Route::post('register', 'AuthController@register');
 Route::post('login', 'AuthController@login');
+Route::get('user/profile', 'AuthController@profile');
 
 Route::post('course/create', 'CourseController@createCourse');
