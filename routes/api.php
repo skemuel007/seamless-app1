@@ -27,4 +27,5 @@ Route::group([
 ], function() {
     Route::post('create', 'CourseController@createCourse');
     Route::post('register', 'CourseRegistrationController@registerCourses');
+    Route::get('/', 'CourseController@allCoursesAndRegistrations');
 });
