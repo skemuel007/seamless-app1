@@ -30,13 +30,13 @@ class AddColumnsToCourseTable extends Migration
     {
         Schema::table('courses', function (Blueprint $table) {
             // drop tables when migration is reversed
-            $table->dropUnique('course_name');
-            $table->dropUnique('course_code');
+            $table->dropUnique('courses_course_name_unique');
+            $table->dropUnique('courses_course_code_unique');
         });
 
         Schema::table('courses', function (Blueprint $table) {
             // drop tables when migration is reversed
-            $table->dropColumn('unit');
+            $table->dropColumn(['course_name', 'course_code','unit']);
         });
     }
 }
