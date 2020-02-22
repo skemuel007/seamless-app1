@@ -84,4 +84,16 @@ class AuthController extends Controller
             'data' => null
         ], JsonResponse::HTTP_CREATED);
     }
+
+    /**
+     * @param Request $request
+     * @return JsonResponse
+     */
+    public function logout(Request $request) {
+        auth()->login(true); // force user token to blacklist
+        return response()->json([
+            'message' => 'User logout',
+            'data' => null,
+        ], 200);
+    }
 }
