@@ -2,9 +2,10 @@
 
 namespace App\Http\Resources;
 
+use Carbon\Carbon;
 use Illuminate\Http\Resources\Json\JsonResource;
 
-class CourseRegistrationResource extends JsonResource
+class UserRegistrationResource extends JsonResource
 {
     /**
      * Transform the resource into an array.
@@ -16,11 +17,8 @@ class CourseRegistrationResource extends JsonResource
     {
         return [
             'id' => $this->id,
-            'course_name' => $this->courseName,
-            'course_code' => $this->courseCode,
-            'unit' => $this->unit,
-            'text' => $this->text,
-            'users' => UserRegistrationResource::collection($this->users)
+            'name' => $this->name,
+            'registration_date' => Carbon::createFromTimestamp($this->pivot->created)
         ];
     }
 }

@@ -2,6 +2,8 @@
 
 namespace App\Http\Controllers;
 
+use App\Course;
+use App\Http\Resources\CourseRegistrationResource;
 use App\Jobs\ProcessCourse;
 use Carbon\Carbon;
 use Illuminate\Http\Request;
@@ -39,11 +41,9 @@ class CourseController extends Controller
         // return json response with 200 ok status
         return response()->json([
             'message' => 'Courses with their registrations',
-            'data' =>
+            'data' => CourseRegistrationResource::collection($coursesWithTheirRegistrations)
         ], 200);
-
     }
-}
 
 
 }

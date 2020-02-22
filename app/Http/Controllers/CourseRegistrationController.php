@@ -23,8 +23,8 @@ class CourseRegistrationController extends Controller
     public function registerCourses(Request $request) {
        // validate request parameter
        $validator = Validator::make($request->all(), [
-           'userId' => 'required',
-           'courseId' => 'required',
+           'user_id' => 'required',
+           'course_id' => 'required',
        ]);
 
         // check for request validation error
