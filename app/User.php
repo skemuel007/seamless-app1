@@ -58,4 +58,16 @@ class User extends Authenticatable implements JWTSubject
     {
         return [];
     }
+
+    /**
+     * @return \Illuminate\Database\Eloquent\Relations\BelongsToMany
+     */
+    public function courses() {
+        return $this->belongsToMany(
+            Course::class,
+            'course_registrations',
+            'user_id',
+            'course_id'
+        )->withPivot(['id', 'created_at']);
+    }
 }

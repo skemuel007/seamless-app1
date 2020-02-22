@@ -20,4 +20,16 @@ class Course extends Model
     protected $hidden = [
         'updated_at'
     ];
+
+    /**
+     * @return \Illuminate\Database\Eloquent\Relations\BelongsToMany
+     */
+    public function users() {
+        return $this->belongsToMany(
+            User::class,
+            'course_registrations',
+            'course_id',
+            'user_id'
+        )->withPivot(['id', 'created_at']);
+    }
 }
