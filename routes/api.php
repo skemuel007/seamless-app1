@@ -21,4 +21,10 @@ Route::post('register', 'AuthController@register')->name('login');
 Route::post('login', 'AuthController@login')->name('register');
 Route::get('user/profile', 'AuthController@profile');
 
-Route::post('course/create', 'CourseController@createCourse');
+
+Route::group([
+    'prefix' => 'course'
+], function() {
+    Route::post('create', 'CourseController@createCourse');
+    Route::post('register', 'CourseRegistrationController@registerCourses');
+});
