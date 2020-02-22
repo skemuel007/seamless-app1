@@ -15,7 +15,18 @@ class CreateCourseRegistrationsTable extends Migration
     {
         Schema::create('course_registrations', function (Blueprint $table) {
             $table->bigIncrements('id');
+            $table->bigInteger('course_id')->unsigned();
+            $table->bigInteger('user_id')->unsigned();
             $table->timestamps();
+
+            // create foreign key relationship
+            $table->foreign('course_id')->references('id')
+                ->on('courses')->onUpdate('cascade')
+                ->onDelete('cascade');
+
+            $table->foreign('user_id')->references('id')
+                ->on('users')->onUpdate('cascade')
+                ->onDelete('cascade');
         });
     }
 
