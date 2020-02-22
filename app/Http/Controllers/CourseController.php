@@ -3,17 +3,23 @@
 namespace App\Http\Controllers;
 
 use App\Course;
+use App\CoursesExport;
 use App\Http\Resources\CourseRegistrationResource;
 use App\Jobs\ProcessCourse;
 use Carbon\Carbon;
 use Illuminate\Http\Request;
+use Maatwebsite\Excel\Excel;
+use PhpOffice\PhpSpreadsheet\Writer\Exception;
 
 class CourseController extends Controller
 {
-    public function __construct()
+    private $excel;
+
+    public function __construct(Excel $excel)
     {
         // add middle ware for authentication and authorization
         $this->middleware('jwt.auth');
+        $this->excel = $excel;
     }
 
     /**
@@ -46,7 +52,19 @@ class CourseController extends Controller
     }
 
     public function exportCourses() {
-
+        try {
+            return $this->excel->download(new CoursesExport, 'courses.xlsx');
+        } catch (Exception $e) {
+            return response()->json([
+                'message' => $e->getMessage(),
+                'data' => null,
+            ]);
+        } catch (\PhpOffice\PhpSpreadsheet\Exception $e) {
+            return response()->json([
+                'message' => $e->getMessage(),
+                'data' => null,
+            ]);
+        }
     }
 
 
