@@ -18,7 +18,7 @@ class UserRegistrationResource extends JsonResource
         return [
             'id' => $this->id,
             'name' => $this->name,
-            'registration_date' => Carbon::createFromTimeString($this->pivot->created_at)->toDateString()
+            'date_enrolled' => Carbon::createFromTimeString($this->pivot->created_at)->toDateString()
         ];
     }
 }
