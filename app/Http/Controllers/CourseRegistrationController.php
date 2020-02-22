@@ -9,7 +9,16 @@ use Validator;
 
 class CourseRegistrationController extends Controller
 {
-    //
+    public function __construct()
+    {
+        $this->middleware('jwt.auth');
+    }
+
+    /**
+     * Resource allows users to register for courses
+     * @param Request $request
+     * @return JsonResponse
+     */
     public function registerCourses(Request $request) {
        // validate request parameter
        $validator = Validator::make($request->all(), [
