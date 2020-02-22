@@ -8,7 +8,16 @@ use Illuminate\Http\Request;
 
 class CourseController extends Controller
 {
-    //
+    public function __construct()
+    {
+        // add middle ware for authentication and authorization
+        $this->middleware('auth:api');
+    }
+
+    /**
+     * Controller method that creates course
+     * @return \Illuminate\Http\JsonResponse
+     */
     public function createCourse() {
        // create job queue with a 5 seconds delay
         $createCourseJob = (new ProcessCourse())
