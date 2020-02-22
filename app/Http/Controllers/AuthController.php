@@ -91,6 +91,7 @@ class AuthController extends Controller
      */
     public function logout(Request $request) {
         auth()->login(true); // force user token to blacklist
+        //
         return response()->json([
             'message' => 'User logout',
             'data' => null,
