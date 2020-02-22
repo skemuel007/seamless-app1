@@ -30,4 +30,20 @@ class CourseController extends Controller
             'data' => []
         ]);
     }
+
+    public function allCoursesAndRegistrations()
+    {
+        // retrieve all courses
+        $coursesWithTheirRegistrations = Course::with('users')->get();
+
+        // return json response with 200 ok status
+        return response()->json([
+            'message' => 'Courses with their registrations',
+            'data' =>
+        ], 200);
+
+    }
+}
+
+
 }
