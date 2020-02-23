@@ -1,0 +1,51 @@
+{
+    "openapi": "3.0.0",
+    "info": {
+        "title": "Seamless Test Api",
+        "description": "Seamless Api Description",
+        "contact": {
+            "email": "skemuel007@gmail.com"
+        },
+        "license": {
+            "name": "Apache 2.0",
+            "url": "http://www.apache.org/licenses/LICENSE-2.0.html"
+        },
+        "version": "1.0.0"
+    },
+    "paths": {
+        "/login": {
+            "post": {
+                "tags": [
+                    "login"
+                ],
+                "summary": "End point for users to login",
+                "operationId": "login",
+                "requestBody": {
+                    "$ref": "#/components/requestBodies/User"
+                },
+                "responses": {
+                    "401": {
+                        "description": "Unauthorized"
+                    }
+                }
+            }
+        }
+    },
+    "components": {
+        "schemas": {
+            "User": {
+                "title": "User model",
+                "description": "User model",
+                "properties": {
+                    "": {
+                        "title": "Phone",
+                        "description": "Phone",
+                        "type": "string",
+                        "format": "msisdn"
+                    }
+                },
+                "type": "object"
+            }
+        }
+    }
+}

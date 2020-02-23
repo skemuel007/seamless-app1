@@ -29,9 +29,9 @@ class AddColumnsToCourseTable extends Migration
     public function down()
     {
         Schema::table('courses', function (Blueprint $table) {
-            // drop tables when migration is reversed
-            $table->dropUnique('courses_course_name_unique');
-            $table->dropUnique('courses_course_code_unique');
+            // drop columns when migration is reversed
+            $table->dropIndex('courses_course_name_unique');
+            $table->dropIndex('courses_course_code_unique');
         });
 
         Schema::table('courses', function (Blueprint $table) {

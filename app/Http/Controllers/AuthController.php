@@ -28,13 +28,44 @@ class AuthController extends Controller
      * @OA\Post(
      *     path="/login",
      *     tags={"login"},
-     *     summary="End point for users to login",
-     *     operationId="login",
-     *     @OA\Response(
-     *         response=401,
-     *         description="Unauthorized"
+     *     summary="End point allows user to login",
+     *     operationId="updatePetWithForm",
+     *     @OA\Parameter(
+     *         name="petId",
+     *         in="path",
+     *         description="ID of pet that needs to be updated",
+     *         required=true,
+     *         @OA\Schema(
+     *             type="integer",
+     *             format="int64"
+     *         )
      *     ),
-     *     requestBody={"$ref": "#/components/requestBodies/User"}
+     *     @OA\Response(
+     *         response=405,
+     *         description="Invalid input"
+     *     ),
+     *     security={
+     *         {"petstore_auth": {"write:pets", "read:pets"}}
+     *     },
+     *     @OA\RequestBody(
+     *         description="Input data format",
+     *         @OA\MediaType(
+     *             mediaType="application/x-www-form-urlencoded",
+     *             @OA\Schema(
+     *                 type="object",
+     *                 @OA\Property(
+     *                     property="name",
+     *                     description="Updated name of the pet",
+     *                     type="string",
+     *                 ),
+     *                 @OA\Property(
+     *                     property="status",
+     *                     description="Updated status of the pet",
+     *                     type="string"
+     *                 )
+     *             )
+     *         )
+     *     )
      * )
      */
     public function login(Request $request) {
