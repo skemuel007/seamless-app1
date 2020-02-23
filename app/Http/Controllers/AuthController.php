@@ -29,38 +29,38 @@ class AuthController extends Controller
      *     path="/login",
      *     tags={"login"},
      *     summary="End point allows user to login",
-     *     operationId="updatePetWithForm",
-     *     @OA\Parameter(
-     *         name="petId",
-     *         in="path",
-     *         description="ID of pet that needs to be updated",
-     *         required=true,
-     *         @OA\Schema(
-     *             type="integer",
-     *             format="int64"
-     *         )
+     *     operationId="login",
+     *     @OA\Response(
+     *         response=401,
+     *         description="Unauthorized"
      *     ),
      *     @OA\Response(
-     *         response=405,
-     *         description="Invalid input"
+     *         response=422,
+     *         description="Request parameter validation error"
      *     ),
-     *     security={
-     *         {"petstore_auth": {"write:pets", "read:pets"}}
-     *     },
+     *     @OA\Response(
+     *         response=200,
+     *         description="Login successful"
+     *     ),
      *     @OA\RequestBody(
      *         description="Input data format",
      *         @OA\MediaType(
-     *             mediaType="application/x-www-form-urlencoded",
+     *             mediaType="application/json",
      *             @OA\Schema(
      *                 type="object",
      *                 @OA\Property(
      *                     property="name",
-     *                     description="Updated name of the pet",
+     *                     description="Name of user",
      *                     type="string",
      *                 ),
      *                 @OA\Property(
-     *                     property="status",
-     *                     description="Updated status of the pet",
+     *                     property="email",
+     *                     description="Email Address of user",
+     *                     type="string"
+     *                 ),
+     *                 @OA\Property(
+     *                     property="password",
+     *                     description="Password of user",
      *                     type="string"
      *                 )
      *             )
