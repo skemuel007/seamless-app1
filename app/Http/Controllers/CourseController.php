@@ -3,14 +3,14 @@
 namespace App\Http\Controllers;
 
 use App\Course;
-use App\CoursesExport;
+use App\Exports\CourseExport;
 use App\Http\Resources\CourseRegistrationResource;
 use App\Jobs\ProcessCourse;
 use Carbon\Carbon;
-use Illuminate\Http\Request;
 use Illuminate\Http\Response;
 use Illuminate\Support\Facades\File;
 use Illuminate\Support\Facades\Storage;
+use Illuminate\Support\Str;
 use Maatwebsite\Excel\Excel;
 use PhpOffice\PhpSpreadsheet\Writer\Exception;
 
@@ -55,25 +55,29 @@ class CourseController extends Controller
     }
 
     public function exportCourses() {
+        // generate random file name
+        $fileName = 'courses' . Str::random(16) . '.csv';
         try {
-            $this->excel->store(new CoursesExport, 'courses.xlsx');
-            
-            $path = storage_path('app/public' . DIRECTORY_SEPARATOR . 'courses.xlsx');
+            /*$this->excel->store( new CourseExport, $fileName, 'public');
 
+            $url = Storage::url($fileName);
+            return response()->json([
+                'message' => 'File retrieved',
+                'data' => $url
+            ], 200);
+
+            $path = storage_path('app/public' . DIRECTORY_SEPARATOR . $fileName);
+
+            // check if file exists
             if( !File::exists($path)) {
                 return response()->json([
-                    'message' => 'File not found',
+                    'message' => 'Request file download error',
                     'data' => null
                 ], 404);
-            }
+            }*/
 
-            $file = File::get($path);
-            $type = File::mimeType($path);
-
-            $response = Response::make($file, 200);
-            $response->header('Content-Type', $type);
-
-            return response;
+            // return download response
+            return $this->excel->download(new CourseExport, 'courses.csv');
 
         } catch (Exception $e) {
             return response()->json([
