@@ -41,15 +41,17 @@ class RegisterTest extends TestCase
 
     public function test_post_already_registered_user() {
 
+        $email = $this->faker->email;
+        $name = $this->faker->name;
         $applicant = factory(User::class)->create([
-            'email' => 'skemuel@gmail.com',
-            'name' => 'Salvation Lloyd Stanley-Kemuel',
+            'email' => $email,
+            'name' => $name,
             'password' => bcrypt('12345'),
         ]);
 
         $data = [
-            'email' => 'skemuel@gmail.com',
-            'name' => 'Salvation Stanley-Kemuel',
+            'email' => $email,
+            'name' => $name,
             'password' => bcrypt('12345')
         ];
 
