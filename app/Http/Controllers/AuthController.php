@@ -49,11 +49,6 @@ class AuthController extends Controller
      *             @OA\Schema(
      *                 type="object",
      *                 @OA\Property(
-     *                     property="name",
-     *                     description="Name of user",
-     *                     type="string",
-     *                 ),
-     *                 @OA\Property(
      *                     property="email",
      *                     description="Email Address of user",
      *                     type="string"
@@ -109,6 +104,45 @@ class AuthController extends Controller
     /**
      * @param Request $request
      * @return JsonResponse
+     *
+     * @OA\Post(
+     *     path="/register",
+     *     tags={"register"},
+     *     summary="End point allows user a to create an account",
+     *     operationId="login",
+     *     @OA\Response(
+     *         response=422,
+     *         description="Request parameter validation error"
+     *     ),
+     *     @OA\Response(
+     *         response=201,
+     *         description="User Created"
+     *     ),
+     *     @OA\RequestBody(
+     *         description="Input data format",
+     *         @OA\MediaType(
+     *             mediaType="application/json",
+     *             @OA\Schema(
+     *                 type="object",
+     *                 @OA\Property(
+     *                     property="name",
+     *                     description="Name of user",
+     *                     type="string",
+     *                 ),
+     *                 @OA\Property(
+     *                     property="email",
+     *                     description="Email Address of user",
+     *                     type="string"
+     *                 ),
+     *                 @OA\Property(
+     *                     property="password",
+     *                     description="Password of user",
+     *                     type="string"
+     *                 )
+     *             )
+     *         )
+     *     )
+     * )
      */
     public function register(Request $request) {
         // validate request parameters
@@ -142,6 +176,7 @@ class AuthController extends Controller
     }
 
     /**
+     *
      * @param Request $request
      * @return JsonResponse
      */

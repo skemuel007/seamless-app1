@@ -4,7 +4,19 @@ namespace App;
 
 use Illuminate\Database\Eloquent\Model;
 
-
+/**
+ * Class Course
+ * @package App
+ * @author Stanley-Kemuel Lloyd Salvation
+ * @OA\Schema(
+ *     title="Course model",
+ *     description="Course model",
+ *     required={"course_code", "course_name", "unit"},
+ *     @OA\Xml(
+ *        name="Course"
+ *     )
+ * )
+ */
 class Course extends Model
 {
     //

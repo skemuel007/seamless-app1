@@ -43,28 +43,6 @@ class User extends Authenticatable implements JWTSubject
     ];
 
     /**
-     * Sets the user's name
-     * @param $value
-     *
-     * @OA\Property(
-     *     description="User's full name",
-     *     title="Name",
-     * )
-     *
-     * @var string
-     */
-    public function setNameAttribute($value) {
-        $this->attributes['name'] = $value;
-    }
-
-    public function setEmailAttribute($value) {
-        $this->attributes['email'] = $value;
-    }
-
-    public function setPasswordAttribute($value) {
-
-    }
-    /**
      * The attributes that should be cast to native types.
      *
      * @var array
