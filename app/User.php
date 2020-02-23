@@ -57,32 +57,10 @@ class User extends Authenticatable implements JWTSubject
         $this->attributes['name'] = $value;
     }
 
-    /**
-     * Set Email Mutator
-     * @param $value
-     *
-     * @OA\Property(
-     *     description="User's email address",
-     *     title="Email",
-     * )
-     * @var string
-     */
     public function setEmailAttribute($value) {
         $this->attributes['email'] = $value;
     }
 
-    /**
-     * Password  Attribute
-     * @param $value
-     *
-     * @OA\Property(
-     *     description="User's password",
-     *     title="Password"
-     * )
-     *
-     * @var string
-     *
-     */
     public function setPasswordAttribute($value) {
 
     }
