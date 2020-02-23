@@ -8,6 +8,9 @@ use App\Http\Resources\CourseRegistrationResource;
 use App\Jobs\ProcessCourse;
 use Carbon\Carbon;
 use Illuminate\Http\Request;
+use Illuminate\Http\Response;
+use Illuminate\Support\Facades\File;
+use Illuminate\Support\Facades\Storage;
 use Maatwebsite\Excel\Excel;
 use PhpOffice\PhpSpreadsheet\Writer\Exception;
 
@@ -53,7 +56,25 @@ class CourseController extends Controller
 
     public function exportCourses() {
         try {
-            return $this->excel->download(new CoursesExport, 'courses.xlsx');
+            $this->excel->store(new CoursesExport, 'courses.xlsx');
+            
+            $path = storage_path('app/public' . DIRECTORY_SEPARATOR . 'courses.xlsx');
+
+            if( !File::exists($path)) {
+                return response()->json([
+                    'message' => 'File not found',
+                    'data' => null
+                ], 404);
+            }
+
+            $file = File::get($path);
+            $type = File::mimeType($path);
+
+            $response = Response::make($file, 200);
+            $response->header('Content-Type', $type);
+
+            return response;
+
         } catch (Exception $e) {
             return response()->json([
                 'message' => $e->getMessage(),
