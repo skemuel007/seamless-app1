@@ -28,5 +28,12 @@ Route::group([
     Route::post('create', 'CourseController@createCourse');
     Route::post('register', 'CourseRegistrationController@registerCourses');
     Route::get('/', 'CourseController@allCoursesAndRegistrations');
-    Route::get('export', 'CourseController@exportCourses');
+
+    Route::group([
+        'prefix' => 'export'
+    ], function() {
+        Route::get('csv', 'CourseController@exportCoursesAsCSV')->name('exportCoursesCSV');
+        Route::get('excel', 'CourseController@exportCoursesAsExcelNative')->name('exportCoursesExcelNative');
+    });
+
 });

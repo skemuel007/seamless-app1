@@ -64,7 +64,7 @@ class Handler extends ExceptionHandler
             return response()->json([
                 'title' => 'Query Error',
                 'message' => $exception->getMessage(),
-                'data' => []
+                'data' => null
             ], 500);
         }
 
@@ -76,7 +76,7 @@ class Handler extends ExceptionHandler
                 [
                     'title' => 'Model Exception Error',
                     'message' =>  $exception->getMessage(),
-                    'data' => []
+                    'data' => null
                 ]
                 , 500);
         }
@@ -85,7 +85,7 @@ class Handler extends ExceptionHandler
             return response()->json([
                 'title' => 'Http Not Found Error',
                 'message' => 'Invalid Http Url - resource locator not found.',
-                'data' => []
+                'data' => null
             ], 500);
         }
 
@@ -103,7 +103,7 @@ class Handler extends ExceptionHandler
                 [
                     'title' => 'Model Exception Error',
                     'message' =>  $exception->getMessage(),
-                    'data' => []
+                    'data' => null
                 ]
                 , 404);
         }
@@ -112,15 +112,23 @@ class Handler extends ExceptionHandler
             return response()->json([
                 'title' => 'Http Method Error',
                 'message' => 'Http method not valid for this url',
-                'data' => []], Response::HTTP_METHOD_NOT_ALLOWED);
+                'data' => null ], Response::HTTP_METHOD_NOT_ALLOWED);
         }
 
         if ( $exception instanceof BindingResolutionException) {
             return response()->json([
                 'title' => 'Target Class not found',
                 'message' => $exception->getMessage(),
-                'data' => []
+                'data' => null
             ], 500);
+        }
+
+        if ( $exception instanceof  \PhpOffice\PhpSpreadsheet\Exception) {
+            return response()->json([
+                'title' => 'Spread sheet exception',
+                'code' => $exception->getCode(),
+                'data' => null
+            ]);
         }
 
         if( $exception instanceof UnauthorizedHttpException) {

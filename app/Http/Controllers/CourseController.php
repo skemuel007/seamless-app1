@@ -21,7 +21,7 @@ class CourseController extends Controller
     public function __construct(Excel $excel)
     {
         // add middle ware for authentication and authorization
-        $this->middleware('jwt.auth');
+        $this->middleware('jwt.auth', ['except' => ['exportCoursesCSV', 'exportCoursesExcelNative']]);
         $this->excel = $excel;
     }
 
@@ -54,11 +54,11 @@ class CourseController extends Controller
         ], 200);
     }
 
-    public function exportCourses() {
+    public function exportCoursesAsCSV() {
         // generate random file name
-        $fileName = 'courses' . Str::random(16) . '.csv';
-        try {
-            /*$this->excel->store( new CourseExport, $fileName, 'public');
+        //$fileName = 'courses' . Str::random(16) . '.csv';
+        /*try {
+            $this->excel->store( new CourseExport, $fileName, 'public');
 
             $url = Storage::url($fileName);
             return response()->json([
@@ -74,10 +74,10 @@ class CourseController extends Controller
                     'message' => 'Request file download error',
                     'data' => null
                 ], 404);
-            }*/
+            }
 
             // return download response
-            return $this->excel->download(new CourseExport, 'courses.csv');
+            // return response()->download($path);
 
         } catch (Exception $e) {
             return response()->json([
@@ -89,8 +89,47 @@ class CourseController extends Controller
                 'message' => $e->getMessage(),
                 'data' => null,
             ]);
-        }
+        }*/
+        return $this->excel->download(new CourseExport, 'courses.csv');
     }
 
+    public function exportCoursesAsExcelNative() {
+        // generate random file name
+        //$fileName = 'courses' . Str::random(16) . '.csv';
+        /*try {
+            $this->excel->store( new CourseExport, $fileName, 'public');
+
+            $url = Storage::url($fileName);
+            return response()->json([
+                'message' => 'File retrieved',
+                'data' => $url
+            ], 200);
+
+            $path = storage_path('app/public' . DIRECTORY_SEPARATOR . $fileName);
+
+            // check if file exists
+            if( !File::exists($path)) {
+                return response()->json([
+                    'message' => 'Request file download error',
+                    'data' => null
+                ], 404);
+            }
+
+            // return download response
+            // return response()->download($path);
+
+        } catch (Exception $e) {
+            return response()->json([
+                'message' => $e->getMessage(),
+                'data' => null,
+            ]);
+        } catch (\PhpOffice\PhpSpreadsheet\Exception $e) {
+            return response()->json([
+                'message' => $e->getMessage(),
+                'data' => null,
+            ]);
+        }*/
+        return $this->excel->download(new CourseExport, 'courses.xlsx');
+    }
 
 }
