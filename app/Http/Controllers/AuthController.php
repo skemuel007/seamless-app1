@@ -7,6 +7,13 @@ use Illuminate\Http\JsonResponse;
 use Illuminate\Http\Request;
 use Validator;
 
+
+/**
+ * Class AuthController
+ * @package App\Http\Controllers
+ *
+ * @author Stanley-Kemuel Lloyd Salvation
+ */
 class AuthController extends Controller
 {
     public function __construct()
@@ -17,6 +24,18 @@ class AuthController extends Controller
     /**
      * @param Request $request
      * @return JsonResponse
+     *
+     * @OA\Post(
+     *     path="/login",
+     *     tags={"login"},
+     *     summary="End point for users to login",
+     *     operationId="login",
+     *     @OA\Response(
+     *         response=401,
+     *         description="Unauthorized"
+     *     ),
+     *     requestBody={"$ref": "#/components/requestBodies/User"}
+     * )
      */
     public function login(Request $request) {
         // validate request

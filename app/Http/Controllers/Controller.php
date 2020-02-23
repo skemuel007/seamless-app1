@@ -11,16 +11,16 @@ use Illuminate\Foundation\Auth\Access\AuthorizesRequests;
  * Class Controller
  * @package App\Http\Controllers
  *
- * @SWG\Swagger(
- *     basePath="/api",
- *     host="localhost:8000",
- *     schemes={"https", "http"},
- *     @SWG\Info(
- *          version="1.0",
- *          title="Seamless API test",
- *          @SWG\Contact(
- *              name="Stanley-Kemuel Lloyd Salvation"
- *          ),
+ * @OA\Info(
+ *      version="1.0.0",
+ *      title="Seamless Test Api",
+ *      description="Seamless Api Description",
+ *      @OA\Contact(
+ *          email="skemuel007@gmail.com"
+ *      ),
+ *     @OA\License(
+ *         name="Apache 2.0",
+ *         url="http://www.apache.org/licenses/LICENSE-2.0.html"
  *     )
  * )
  *
