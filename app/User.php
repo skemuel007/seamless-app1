@@ -14,6 +14,10 @@ use Tymon\JWTAuth\Contracts\JWTSubject;
  * @OA\Schema(
  *     title="User model",
  *     description="User model",
+ *     required={"name", "email", "password"},
+ *     @OA\Xml(
+ *        name="User"
+ *     )
  * )
  */
 class User extends Authenticatable implements JWTSubject
@@ -43,9 +47,8 @@ class User extends Authenticatable implements JWTSubject
      * @param $value
      *
      * @OA\Property(
-     *     format="msisdn",
-     *     description="Phone",
-     *     title="Phone",
+     *     description="User's full name",
+     *     title="Name",
      * )
      *
      * @var string
@@ -54,6 +57,35 @@ class User extends Authenticatable implements JWTSubject
         $this->attributes['name'] = $value;
     }
 
+    /**
+     * Set Email Mutator
+     * @param $value
+     *
+     * @OA\Property(
+     *     description="User's email address",
+     *     title="Email",
+     * )
+     * @var string
+     */
+    public function setEmailAttribute($value) {
+        $this->attributes['email'] = $value;
+    }
+
+    /**
+     * Password  Attribute
+     * @param $value
+     *
+     * @OA\Property(
+     *     description="User's password",
+     *     title="Password"
+     * )
+     *
+     * @var string
+     *
+     */
+    public function setPasswordAttribute($value) {
+
+    }
     /**
      * The attributes that should be cast to native types.
      *
