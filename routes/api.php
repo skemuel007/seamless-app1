@@ -32,8 +32,8 @@ Route::group([
     Route::group([
         'prefix' => 'export'
     ], function() {
-        Route::get('csv', 'CourseController@exportCoursesAsCSV')->name('exportCoursesCSV');
-        Route::get('excel', 'CourseController@exportCoursesAsExcelNative')->name('exportCoursesExcelNative');
+        Route::get('csv', 'CourseController@exportCoursesAsCSV')->name('exportCoursesAsCSV');
+        Route::get('excel', 'CourseController@exportCoursesAsExcelNative')->name('exportCoursesAsExcelNative');
     });
 
 });

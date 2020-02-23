@@ -21,7 +21,7 @@ class CourseController extends Controller
     public function __construct(Excel $excel)
     {
         // add middle ware for authentication and authorization
-        $this->middleware('jwt.auth', ['except' => ['exportCoursesCSV', 'exportCoursesExcelNative']]);
+        $this->middleware('jwt.auth', ['except' => ['exportCoursesAsCSV', 'exportCoursesAsExcelNative']]);
         $this->excel = $excel;
     }
 
