@@ -13,14 +13,14 @@ class MyClass {
 class LoginTest extends TestCase
 {
     public function test_requires_email_password() {
-        $response = new \stdClass();
+        /*$response = new \stdClass();
         $response->message = 'Parameter validation failure';
 
         $errors = new MyClass();
         $errors->email = ['The email field is required.'];
         $errors->password = ['The password field is required.'];
 
-        $response->error = $errors;
+        $response->error = $errors;*/
 
         $this->json('POST', '/api/login')
             ->assertStatus(422);
